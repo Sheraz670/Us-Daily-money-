@@ -1,0 +1,1971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">US Daily Money Tools - Simple Calculators for Everyday Life</title>
+    <meta id="meta-desc" name="description" content="Free everyday financial, math, salary, tax, date, and health calculators for US users. Fast, accurate, mobile-friendly tools with zero popups.">
+    <link id="canonical-url" rel="canonical" href="https://usdailymoneytools.com/">
+    
+    <!-- Open Graph Tags -->
+    <meta id="og-title" property="og:title" content="US Daily Money Tools - Simple Calculators for Everyday Life">
+    <meta id="og-desc" property="og:description" content="Free everyday financial, math, salary, tax, date, and health calculators for US users. Fast, accurate, mobile-friendly tools.">
+    <meta id="og-url" property="og:url" content="https://usdailymoneytools.com/">
+    <meta property="og:type" content="website">
+
+    <!-- Analytics Placeholders -->
+    <!-- Google Tag Manager / GA4: Replace GA_MEASUREMENT_ID with actual ID -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script> -->
+    <!-- Google Search Console Verification: <meta name="google-site-verification" content="SEARCH_CONSOLE_VERIFICATION_CODE" /> -->
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        },
+                        emerald: {
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                        },
+                        slate: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Dynamic JSON-LD Structured Data Container -->
+    <script id="json-ld-schema" type="application/ld+json"></script>
+
+    <style>
+        /* Custom accessibility and print styling */
+        :focus-visible {
+            outline: 2px solid #059669;
+            outline-offset: 2px;
+        }
+        .ad-placeholder {
+            background: repeating-linear-gradient(
+                45deg,
+                #f8fafc,
+                #f8fafc 10px,
+                #f1f5f9 10px,
+                #f1f5f9 20px
+            );
+        }
+        @media print {
+            header, footer, .no-print, .ad-placeholder {
+                display: none !important;
+            }
+            main {
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col antialiased selection:bg-emerald-500 selection:text-white">
+
+    <!-- Header Navigation -->
+    <header class="bg-navy-900 text-white sticky top-0 z-40 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Brand Logo -->
+                <a href="#/" class="flex items-center space-x-3 text-white font-bold text-xl hover:opacity-90 transition">
+                    <div class="w-10 h-10 rounded-lg bg-emerald-600 flex items-center justify-center text-white shadow">
+                        <i class="fa-solid me-0 fa-calculator text-lg"></i>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="leading-tight tracking-wide">US Daily Money</span>
+                        <span class="text-xs text-emerald-400 font-normal">Tools & Calculators</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex space-x-1 lg:space-x-4 text-sm font-medium">
+                    <a href="#/" class="px-3 py-2 rounded-md hover:bg-slate-800 transition">Home</a>
+                    <a href="#/money-calculators" class="px-3 py-2 rounded-md hover:bg-slate-800 transition">Money</a>
+                    <a href="#/salary-calculators" class="px-3 py-2 rounded-md hover:bg-slate-800 transition">Salary</a>
+                    <a href="#/tax-calculators" class="px-3 py-2 rounded-md hover:bg-slate-800 transition">Tax</a>
+                    <a href="#/math-calculators" class="px-3 py-2 rounded-md hover:bg-slate-800 transition">Math</a>
+                    <a href="#/date-calculators" class="px-3 py-2 rounded-md hover:bg-slate-800 transition">Date/Time</a>
+                    <a href="#/bmi-calculator" class="px-3 py-2 rounded-md hover:bg-slate-800 transition">Health</a>
+                </nav>
+
+                <!-- Search Button & Mobile Menu Toggle -->
+                <div class="flex items-center space-x-2">
+                    <button id="quick-search-btn" onclick="openSearchModal()" class="p-2 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition flex items-center space-x-1 text-sm bg-slate-800/50 px-3 py-1.5 border border-slate-700" aria-label="Search tools">
+                        <i class="fa-solid fa-magnifying-glass text-emerald-400"></i>
+                        <span class="hidden sm:inline text-xs text-slate-300">Search...</span>
+                    </button>
+                    
+                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-md text-slate-300 hover:text-white hover:bg-slate-800 focus:outline-none" aria-label="Open Navigation Menu">
+                        <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-navy-900 border-t border-slate-800 px-4 pt-2 pb-6 space-y-2">
+            <a href="#/" onclick="closeMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800">Home</a>
+            <a href="#/money-calculators" onclick="closeMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800">Money Calculators</a>
+            <a href="#/salary-calculators" onclick="closeMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800">Salary Calculators</a>
+            <a href="#/tax-calculators" onclick="closeMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800">Tax Calculators</a>
+            <a href="#/math-calculators" onclick="closeMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800">Math Calculators</a>
+            <a href="#/date-calculators" onclick="closeMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800">Date & Time Calculators</a>
+            <a href="#/bmi-calculator" onclick="closeMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800">BMI Health Calculator</a>
+            <div class="pt-2 border-t border-slate-800 flex justify-around text-xs text-slate-400">
+                <a href="#/about" onclick="closeMobileMenu()" class="hover:underline">About</a>
+                <a href="#/contact" onclick="closeMobileMenu()" class="hover:underline">Contact</a>
+                <a href="#/privacy-policy" onclick="closeMobileMenu()" class="hover:underline">Privacy</a>
+                <a href="#/terms" onclick="closeMobileMenu()" class="hover:underline">Terms</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Global Top Ad Banner Placeholder -->
+    <div class="no-print bg-slate-100 border-b border-slate-200 py-2 text-center text-xs text-slate-400">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="ad-placeholder border border-dashed border-slate-300 rounded p-2 text-center text-slate-400">
+                <span class="font-mono text-[10px] uppercase tracking-wider block text-slate-400">Advertisement Placeholder</span>
+                <span class="text-xs">Responsive Leaderboard Ad Zone (728x90 or 320x50)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Viewport Container -->
+    <main id="app-root" class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <!-- SPA Dynamic Content Injected Here -->
+    </main>
+
+    <!-- Interactive Search Modal Dialog -->
+    <div id="search-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-start justify-center pt-16 px-4">
+        <div class="bg-white rounded-xl shadow-2xl max-w-xl w-full overflow-hidden border border-slate-200">
+            <div class="p-4 border-b border-slate-200 flex justify-between items-center bg-slate-50">
+                <div class="flex items-center space-x-3 flex-grow">
+                    <i class="fa-solid fa-magnifying-glass text-slate-400"></i>
+                    <input type="text" id="modal-search-input" onkeyup="filterModalSearchResults()" placeholder="Search calculators (e.g. Tip, Overtime, BMI, Loan)..." class="w-full bg-transparent focus:outline-none text-slate-800 placeholder-slate-400 text-base">
+                </div>
+                <button onclick="closeSearchModal()" class="text-slate-400 hover:text-slate-600 p-1 rounded-lg">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            <div id="modal-search-results" class="max-h-96 overflow-y-auto divide-y divide-slate-100 p-2">
+                <!-- Dynamic search items -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-navy-900 text-slate-300 mt-12 border-t border-slate-800 text-sm no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-3">
+                        <div class="w-7 h-7 rounded bg-emerald-600 flex items-center justify-center text-white text-xs">
+                            <i class="fa-solid fa-calculator"></i>
+                        </div>
+                        <span class="font-bold text-white text-base">US Daily Money Tools</span>
+                    </div>
+                    <p class="text-slate-400 text-xs leading-relaxed mb-4">
+                        Simple, fast, and secure everyday financial, salary, tax, math, and date calculators tailored specifically for US users.
+                    </p>
+                    <p class="text-xs text-slate-500">&copy; <span id="year-copy">2026</span> US Daily Money Tools. All rights reserved.</p>
+                </div>
+                <div>
+                    <h3 class="text-white font-semibold mb-3 text-xs uppercase tracking-wider">Top Calculators</h3>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#/tip-calculator" class="hover:text-emerald-400 transition">Tip Calculator</a></li>
+                        <li><a href="#/paycheck-calculator" class="hover:text-emerald-400 transition">Paycheck Estimator</a></li>
+                        <li><a href="#/hourly-to-salary-calculator" class="hover:text-emerald-400 transition">Hourly to Salary</a></li>
+                        <li><a href="#/loan-payment-calculator" class="hover:text-emerald-400 transition">Loan Payment Calculator</a></li>
+                        <li><a href="#/overtime-calculator" class="hover:text-emerald-400 transition">Overtime Pay Calculator</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-semibold mb-3 text-xs uppercase tracking-wider">Quick Navigation</h3>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#/money-calculators" class="hover:text-emerald-400 transition">Money Calculators</a></li>
+                        <li><a href="#/salary-calculators" class="hover:text-emerald-400 transition">Salary & Paycheck</a></li>
+                        <li><a href="#/tax-calculators" class="hover:text-emerald-400 transition">Sales & Income Tax</a></li>
+                        <li><a href="#/math-calculators" class="hover:text-emerald-400 transition">Percentage & Math</a></li>
+                        <li><a href="#/date-calculators" class="hover:text-emerald-400 transition">Date & Age Calculators</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-semibold mb-3 text-xs uppercase tracking-wider">Legal & Info</h3>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#/about" class="hover:text-emerald-400 transition">About Us</a></li>
+                        <li><a href="#/contact" class="hover:text-emerald-400 transition">Contact Us</a></li>
+                        <li><a href="#/privacy-policy" class="hover:text-emerald-400 transition">Privacy Policy</a></li>
+                        <li><a href="#/terms" class="hover:text-emerald-400 transition">Terms of Use</a></li>
+                        <li><a href="#/disclaimer" class="hover:text-emerald-400 transition">Financial Disclaimer</a></li>
+                        <li><a href="#/sitemap.xml" class="hover:text-emerald-400 transition">XML Sitemap Code</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 pt-6 text-center text-xs text-slate-500">
+                <p>Disclaimer: The calculators provided on US Daily Money Tools are intended for educational and informational purposes only and do not constitute legal, tax, or financial advice.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const CALCULATORS_DB = [
+            {
+                id: 'tip-calculator',
+                title: 'Tip Calculator',
+                category: 'money',
+                categoryLabel: 'Money',
+                icon: 'fa-hand-holding-dollar',
+                url: '#/tip-calculator',
+                shortDesc: 'Calculate server tips, split total bills, and determine exact per-person costs.',
+                description: 'Fast and flexible tip calculator for restaurant bills, deliveries, and shared dining expenses.',
+                keywords: ['tip', 'bill split', 'restaurant', 'gratuity', 'dining']
+            },
+            {
+                id: 'discount-calculator',
+                title: 'Discount Calculator',
+                category: 'money',
+                categoryLabel: 'Money',
+                icon: 'fa-tags',
+                url: '#/discount-calculator',
+                shortDesc: 'Compute final sale prices, total dollar savings, and percentage discounts.',
+                description: 'Determine exact savings and final cost during shopping sales, promotional clearance, and coupons.',
+                keywords: ['discount', 'sale', 'shopping', 'clearance', 'savings', 'off']
+            },
+            {
+                id: 'percentage-calculator',
+                title: 'Percentage Calculator',
+                category: 'math',
+                categoryLabel: 'Math',
+                icon: 'fa-percent',
+                url: '#/percentage-calculator',
+                shortDesc: 'Solve 5 percentage modes: X% of Y, percentage increase, decrease, and differences.',
+                description: 'Multi-purpose percentage calculator supporting basic values, percent change, growth, and margins.',
+                keywords: ['percentage', 'percent', 'math', 'increase', 'decrease', 'difference']
+            },
+            {
+                id: 'hourly-to-salary-calculator',
+                title: 'Hourly to Salary Calculator',
+                category: 'salary',
+                categoryLabel: 'Salary',
+                icon: 'fa-clock text-emerald-600',
+                url: '#/hourly-to-salary-calculator',
+                shortDesc: 'Convert your hourly wage into weekly, monthly, and annual gross salary figures.',
+                description: 'Calculate equivalent annual income from hourly rates based on regular working hours and weeks worked per year.',
+                keywords: ['hourly', 'salary', 'wage', 'annual', 'income', 'paycheck']
+            },
+            {
+                id: 'salary-to-hourly-calculator',
+                title: 'Salary to Hourly Calculator',
+                category: 'salary',
+                categoryLabel: 'Salary',
+                icon: 'fa-briefcase',
+                url: '#/salary-to-hourly-calculator',
+                shortDesc: 'Convert annual gross salary into hourly, daily, and weekly wage equivalents.',
+                description: 'Determine your true hourly rate from an annual salary offer or pay structure.',
+                keywords: ['salary to hourly', 'wage rate', 'pay breakdown', 'annual income']
+            },
+            {
+                id: 'overtime-calculator',
+                title: 'Overtime Pay Calculator',
+                category: 'salary',
+                categoryLabel: 'Salary',
+                icon: 'fa-stopwatch',
+                url: '#/overtime-calculator',
+                shortDesc: 'Calculate regular, time-and-a-half (1.5x), or double-time (2.0x) overtime pay.',
+                description: 'Accurately figure out total earnings for work hours exceeding standard weekly thresholds.',
+                keywords: ['overtime', 'time and a half', 'double time', 'extra hours', 'pay']
+            },
+            {
+                id: 'sales-tax-calculator',
+                title: 'Sales Tax Calculator',
+                category: 'tax',
+                categoryLabel: 'Tax',
+                icon: 'fa-receipt',
+                url: '#/sales-tax-calculator',
+                shortDesc: 'Calculate sales tax amounts and total item cost based on state/local tax rates.',
+                description: 'Find total price including tax for goods, purchases, and state tax calculations.',
+                keywords: ['sales tax', 'tax rate', 'state tax', 'total price', 'retail tax']
+            },
+            {
+                id: 'paycheck-calculator',
+                title: 'Paycheck Estimator',
+                category: 'tax',
+                categoryLabel: 'Tax',
+                icon: 'fa-money-check-dollar',
+                url: '#/paycheck-calculator',
+                shortDesc: 'Estimate take-home net pay after federal taxes, state withholding, and deductions.',
+                description: 'Educational net pay estimator detailing gross pay vs. estimated tax withholdings.',
+                keywords: ['paycheck', 'net pay', 'take home', 'withholding', 'income tax']
+            },
+            {
+                id: 'age-calculator',
+                title: 'Age Calculator',
+                category: 'date',
+                categoryLabel: 'Date & Time',
+                icon: 'fa-cake-candles',
+                url: '#/age-calculator',
+                shortDesc: 'Calculate exact age in years, months, days, total days lived, and next birthday.',
+                description: 'Determine exact chronological age from date of birth down to total days and birthday countdown.',
+                keywords: ['age', 'birthday', 'dob', 'how old', 'days lived']
+            },
+            {
+                id: 'date-calculator',
+                title: 'Date Difference Calculator',
+                category: 'date',
+                categoryLabel: 'Date & Time',
+                icon: 'fa-calendar-days',
+                url: '#/date-calculator',
+                shortDesc: 'Find exact days, weeks, and months between two calendar dates.',
+                description: 'Compute precise duration between two dates accounting for leap years and calendar lengths.',
+                keywords: ['date difference', 'days between', 'calendar span', 'date duration']
+            },
+            {
+                id: 'loan-payment-calculator',
+                title: 'Loan Payment Calculator',
+                category: 'money',
+                categoryLabel: 'Money',
+                icon: 'fa-building-columns',
+                url: '#/loan-payment-calculator',
+                shortDesc: 'Calculate estimated monthly payments, total interest, and loan amortization costs.',
+                description: 'Estimate monthly auto, personal, or mortgage loan payments based on principal, APR, and term.',
+                keywords: ['loan', 'monthly payment', 'interest rate', 'amortization', 'mortgage']
+            },
+            {
+                id: 'bmi-calculator',
+                title: 'BMI Health Calculator',
+                category: 'health',
+                categoryLabel: 'Health',
+                icon: 'fa-weight-scale',
+                url: '#/bmi-calculator',
+                shortDesc: 'Calculate Body Mass Index (BMI) using US (lbs/in) or Metric (kg/cm) units.',
+                description: 'Evaluate body mass index and standard CDC health weight categories.',
+                keywords: ['bmi', 'body mass index', 'weight', 'health', 'height']
+            }
+        ];
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function closeMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (!menu.classList.contains('hidden')) {
+                menu.classList.add('hidden');
+            }
+        }
+
+        function openSearchModal() {
+            const modal = document.getElementById('search-modal');
+            modal.classList.remove('hidden');
+            const input = document.getElementById('modal-search-input');
+            input.value = '';
+            input.focus();
+            filterModalSearchResults();
+        }
+
+        function closeSearchModal() {
+            document.getElementById('search-modal').classList.add('hidden');
+        }
+
+        function filterModalSearchResults() {
+            const query = (document.getElementById('modal-search-input').value || '').toLowerCase().trim();
+            const resultsContainer = document.getElementById('modal-search-results');
+            
+            const filtered = CALCULATORS_DB.filter(calc => 
+                calc.title.toLowerCase().includes(query) || 
+                calc.shortDesc.toLowerCase().includes(query) ||
+                calc.keywords.some(k => k.toLowerCase().includes(query))
+            );
+
+            if (filtered.length === 0) {
+                resultsContainer.innerHTML = `<div class="p-4 text-center text-slate-400 text-sm">No matching calculators found for "${query}"</div>`;
+                return;
+            }
+
+            resultsContainer.innerHTML = filtered.map(calc => `
+                <a href="${calc.url}" onclick="closeSearchModal()" class="flex items-center p-3 hover:bg-slate-50 transition rounded-lg group">
+                    <div class="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center mr-3 group-hover:bg-emerald-600 group-hover:text-white transition">
+                        <i class="fa-solid ${calc.icon} text-lg"></i>
+                    </div>
+                    <div>
+                        <div class="text-sm font-semibold text-slate-800 group-hover:text-emerald-600">${calc.title}</div>
+                        <div class="text-xs text-slate-500">${calc.shortDesc}</div>
+                    </div>
+                </a>
+            `).join('');
+        }
+
+        // Close modal on Escape key
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeSearchModal();
+        });
+
+        function updateSeoMetadata(title, description, path, schemaObj = null) {
+            document.title = `${title} | US Daily Money Tools`;
+            document.getElementById('page-title').innerText = `${title} | US Daily Money Tools`;
+            document.getElementById('meta-desc').setAttribute('content', description);
+            
+            const fullUrl = `https://usdailymoneytools.com${path}`;
+            document.getElementById('canonical-url').setAttribute('href', fullUrl);
+            document.getElementById('og-title').setAttribute('content', title);
+            document.getElementById('og-desc').setAttribute('content', description);
+            document.getElementById('og-url').setAttribute('content', fullUrl);
+
+            // Dynamic JSON-LD injection
+            const baseBreadcrumb = {
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "https://usdailymoneytools.com/"
+                    }
+                ]
+            };
+
+            if (path !== '/' && path !== '') {
+                baseBreadcrumb.itemListElement.push({
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": title,
+                    "item": fullUrl
+                });
+            }
+
+            const schemas = [baseBreadcrumb];
+            if (schemaObj) schemas.push(schemaObj);
+
+            document.getElementById('json-ld-schema').textContent = JSON.stringify(schemas, null, 2);
+        }
+
+        function router() {
+            const rawHash = window.location.hash || '#/';
+            const cleanPath = rawHash.replace('#', '');
+            const app = document.getElementById('app-root');
+            window.scrollTo(0, 0);
+
+            // Handle technical XML / TXT route previews
+            if (cleanPath === '/sitemap.xml') {
+                renderSitemapPage(app);
+                return;
+            }
+            if (cleanPath === '/robots.txt') {
+                renderRobotsPage(app);
+                return;
+            }
+
+            // Category routes
+            if (cleanPath.endsWith('-calculators') && !cleanPath.includes('calculator/')) {
+                const categoryKey = cleanPath.replace('/', '').replace('-calculators', '');
+                renderCategoryPage(app, categoryKey, cleanPath);
+                return;
+            }
+
+            // Specific Calculators
+            const foundCalc = CALCULATORS_DB.find(c => c.url === `#${cleanPath}`);
+            if (foundCalc) {
+                renderCalculatorView(app, foundCalc);
+                return;
+            }
+
+            // Static Content Routes
+            switch (cleanPath) {
+                case '/':
+                    renderHomePage(app);
+                    break;
+                case '/about':
+                    renderAboutPage(app);
+                    break;
+                case '/contact':
+                    renderContactPage(app);
+                    break;
+                case '/privacy-policy':
+                    renderPrivacyPage(app);
+                    break;
+                case '/terms':
+                    renderTermsPage(app);
+                    break;
+                case '/disclaimer':
+                    renderDisclaimerPage(app);
+                    break;
+                default:
+                    render404Page(app);
+                    break;
+            }
+        }
+
+        window.addEventListener('hashchange', router);
+        window.addEventListener('load', () => {
+            document.getElementById('year-copy').textContent = new Date().getFullYear();
+            router();
+        });
+
+        function renderHomePage(container) {
+            updateSeoMetadata(
+                "Free Everyday Calculators for the US",
+                "Quick, simple tools for money, salary, tax, percentage, dates and everyday calculations. Fast, private, and 100% free.",
+                "/"
+            );
+
+            container.innerHTML = `
+                <!-- Hero Section -->
+                <div class="bg-gradient-to-br from-navy-900 to-slate-800 text-white rounded-2xl p-6 sm:p-10 mb-8 shadow-xl border border-slate-700">
+                    <div class="max-w-3xl">
+                        <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-3 border border-emerald-500/30">
+                            100% Free & No Registration
+                        </span>
+                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4">
+                            Free Everyday Calculators for the US
+                        </h1>
+                        <p class="text-slate-300 text-base sm:text-lg mb-6 leading-relaxed">
+                            Quick, simple tools for money, salary, tax, percentage, dates and everyday calculations. Built for instant, accurate answers on mobile & desktop.
+                        </p>
+                        
+                        <!-- Search Box -->
+                        <div class="relative max-w-xl">
+                            <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                            <input type="text" id="home-search" oninput="handleHomeSearch(this.value)" placeholder="Search a calculator (e.g. Tip, Paycheck, Loan, BMI)..." class="w-full pl-11 pr-4 py-3.5 bg-white text-slate-900 rounded-xl shadow-lg border-0 focus:ring-2 focus:ring-emerald-500 text-sm sm:text-base placeholder-slate-400">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category Quick Filters -->
+                <div class="mb-8">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-bold text-slate-900">Explore by Category</h2>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+                        <a href="#/money-calculators" class="flex flex-col items-center p-4 bg-white rounded-xl border border-slate-200 hover:border-emerald-500 hover:shadow-md transition text-center group">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-2 group-hover:bg-emerald-600 group-hover:text-white transition">
+                                <i class="fa-solid fa-sack-dollar text-xl"></i>
+                            </div>
+                            <span class="text-sm font-semibold text-slate-800">Money</span>
+                            <span class="text-xs text-slate-400">3 Tools</span>
+                        </a>
+                        <a href="#/salary-calculators" class="flex flex-col items-center p-4 bg-white rounded-xl border border-slate-200 hover:border-emerald-500 hover:shadow-md transition text-center group">
+                            <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-2 group-hover:bg-blue-600 group-hover:text-white transition">
+                                <i class="fa-solid fa-briefcase text-xl"></i>
+                            </div>
+                            <span class="text-sm font-semibold text-slate-800">Salary</span>
+                            <span class="text-xs text-slate-400">3 Tools</span>
+                        </a>
+                        <a href="#/tax-calculators" class="flex flex-col items-center p-4 bg-white rounded-xl border border-slate-200 hover:border-emerald-500 hover:shadow-md transition text-center group">
+                            <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center mb-2 group-hover:bg-purple-600 group-hover:text-white transition">
+                                <i class="fa-solid fa-receipt text-xl"></i>
+                            </div>
+                            <span class="text-sm font-semibold text-slate-800">Tax</span>
+                            <span class="text-xs text-slate-400">2 Tools</span>
+                        </a>
+                        <a href="#/math-calculators" class="flex flex-col items-center p-4 bg-white rounded-xl border border-slate-200 hover:border-emerald-500 hover:shadow-md transition text-center group">
+                            <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-2 group-hover:bg-amber-600 group-hover:text-white transition">
+                                <i class="fa-solid fa-percent text-xl"></i>
+                            </div>
+                            <span class="text-sm font-semibold text-slate-800">Math</span>
+                            <span class="text-xs text-slate-400">1 Tool</span>
+                        </a>
+                        <a href="#/date-calculators" class="flex flex-col items-center p-4 bg-white rounded-xl border border-slate-200 hover:border-emerald-500 hover:shadow-md transition text-center group">
+                            <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-2 group-hover:bg-indigo-600 group-hover:text-white transition">
+                                <i class="fa-solid fa-calendar-days text-xl"></i>
+                            </div>
+                            <span class="text-sm font-semibold text-slate-800">Date & Time</span>
+                            <span class="text-xs text-slate-400">2 Tools</span>
+                        </a>
+                        <a href="#/bmi-calculator" class="flex flex-col items-center p-4 bg-white rounded-xl border border-slate-200 hover:border-emerald-500 hover:shadow-md transition text-center group">
+                            <div class="w-12 h-12 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center mb-2 group-hover:bg-rose-600 group-hover:text-white transition">
+                                <i class="fa-solid fa-heart-pulse text-xl"></i>
+                            </div>
+                            <span class="text-sm font-semibold text-slate-800">Health</span>
+                            <span class="text-xs text-slate-400">1 Tool</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Main Calculator Cards Grid -->
+                <div class="mb-12">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-2xl font-bold text-slate-900">All Calculators & Tools</h2>
+                        <span id="calc-count" class="text-xs text-slate-500 bg-slate-200 px-2.5 py-1 rounded-full font-medium">12 Calculators</span>
+                    </div>
+                    
+                    <div id="calculators-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        ${CALCULATORS_DB.map(calc => createCalculatorCardHtml(calc)).join('')}
+                    </div>
+                </div>
+
+                <!-- Popular Tools Highlight Section -->
+                <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm mb-12">
+                    <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center">
+                        <i class="fa-solid fa-fire text-amber-500 mr-2"></i> Popular US Everyday Tools
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <a href="#/paycheck-calculator" class="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-emerald-500 transition block">
+                            <div class="font-bold text-slate-900 text-base mb-1">Paycheck Estimator</div>
+                            <p class="text-xs text-slate-500">Estimate net take-home salary after federal and state taxes.</p>
+                        </a>
+                        <a href="#/tip-calculator" class="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-emerald-500 transition block">
+                            <div class="font-bold text-slate-900 text-base mb-1">Tip & Bill Splitter</div>
+                            <p class="text-xs text-slate-500">Easily split restaurant tabs and compute custom tip amounts.</p>
+                        </a>
+                        <a href="#/loan-payment-calculator" class="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-emerald-500 transition block">
+                            <div class="font-bold text-slate-900 text-base mb-1">Loan Payment Calculator</div>
+                            <p class="text-xs text-slate-500">Plan personal, auto, or mortgage monthly amortization costs.</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Frequently Asked Questions -->
+                <div class="bg-slate-100 rounded-2xl p-6 sm:p-8 border border-slate-200 mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6 text-center">Frequently Asked Questions</h2>
+                    <div class="space-y-4 max-w-4xl mx-auto">
+                        <details class="bg-white rounded-xl p-4 shadow-sm border border-slate-200 group">
+                            <summary class="font-semibold text-slate-800 cursor-pointer flex justify-between items-center list-none">
+                                <span>Are these calculators free to use?</span>
+                                <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition"></i>
+                            </summary>
+                            <p class="mt-3 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+                                Yes, 100% free! All tools on US Daily Money Tools are completely free to use with no accounts, sign-ups, or hidden fees.
+                            </p>
+                        </details>
+                        <details class="bg-white rounded-xl p-4 shadow-sm border border-slate-200 group">
+                            <summary class="font-semibold text-slate-800 cursor-pointer flex justify-between items-center list-none">
+                                <span>Is my financial data kept private?</span>
+                                <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition"></i>
+                            </summary>
+                            <p class="mt-3 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+                                Absolutely. All calculations run client-side directly within your web browser. We never store, transmit, or sell any of your numbers or personal information.
+                            </p>
+                        </details>
+                        <details class="bg-white rounded-xl p-4 shadow-sm border border-slate-200 group">
+                            <summary class="font-semibold text-slate-800 cursor-pointer flex justify-between items-center list-none">
+                                <span>Are tax and loan calculations legally binding?</span>
+                                <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition"></i>
+                            </summary>
+                            <p class="mt-3 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+                                No. Our calculators provide educational estimates only. For official tax, payroll, or loan disclosures, please consult a licensed CPA or financial professional.
+                            </p>
+                        </details>
+                    </div>
+                </div>
+            `;
+        }
+
+        function createCalculatorCardHtml(calc) {
+            return `
+                <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm hover:shadow-md hover:border-emerald-500 transition flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition">
+                                <i class="fa-solid ${calc.icon} text-lg"></i>
+                            </div>
+                            <span class="text-[11px] font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600">
+                                ${calc.categoryLabel}
+                            </span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-emerald-600 transition">${calc.title}</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed mb-4">${calc.shortDesc}</p>
+                    </div>
+                    <a href="${calc.url}" class="inline-flex items-center justify-center w-full px-4 py-2 bg-slate-100 hover:bg-emerald-600 text-slate-700 hover:text-white rounded-lg text-xs font-semibold transition space-x-2">
+                        <span>Open Calculator</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+            `;
+        }
+
+        function handleHomeSearch(query) {
+            const q = query.toLowerCase().trim();
+            const grid = document.getElementById('calculators-grid');
+            const countEl = document.getElementById('calc-count');
+            
+            const filtered = CALCULATORS_DB.filter(c => 
+                c.title.toLowerCase().includes(q) || 
+                c.shortDesc.toLowerCase().includes(q) ||
+                c.keywords.some(k => k.includes(q))
+            );
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400">No calculators found matching "${query}"</div>`;
+                countEl.textContent = '0 Calculators';
+            } else {
+                grid.innerHTML = filtered.map(calc => createCalculatorCardHtml(calc)).join('');
+                countEl.textContent = `${filtered.length} Calculator${filtered.length > 1 ? 's' : ''}`;
+            }
+        }
+
+        function renderCategoryPage(container, categoryKey, path) {
+            const categoryTitles = {
+                'money': 'Money & Financial Calculators',
+                'salary': 'Salary & Compensation Calculators',
+                'tax': 'Tax & Payroll Calculators',
+                'math': 'Math & Percentage Calculators',
+                'date': 'Date & Time Calculators',
+                'health': 'Health & Fitness Calculators'
+            };
+
+            const title = categoryTitles[categoryKey] || 'Calculators';
+            const items = CALCULATORS_DB.filter(c => c.category === categoryKey);
+
+            updateSeoMetadata(title, `Explore free ${title.toLowerCase()} designed for fast, simple calculations on any device.`, path);
+
+            container.innerHTML = `
+                <div class="mb-6">
+                    <nav class="flex text-xs text-slate-500 mb-3" aria-label="Breadcrumb">
+                        <a href="#/" class="hover:underline">Home</a>
+                        <span class="mx-2">/</span>
+                        <span class="text-slate-800 font-semibold">${title}</span>
+                    </nav>
+                    <h1 class="text-3xl font-extrabold text-slate-900 mb-2">${title}</h1>
+                    <p class="text-slate-600 text-sm">Select a tool below to perform accurate estimations instantly.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                    ${items.map(calc => createCalculatorCardHtml(calc)).join('')}
+                </div>
+            `;
+        }
+
+        function renderCalculatorView(container, calc) {
+            updateSeoMetadata(
+                calc.title,
+                calc.description,
+                calc.url.replace('#', ''),
+                {
+                    "@context": "https://schema.org",
+                    "@type": "WebApplication",
+                    "name": calc.title,
+                    "url": `https://usdailymoneytools.com${calc.url.replace('#', '')}`,
+                    "applicationCategory": "BusinessApplication",
+                    "operatingSystem": "All"
+                }
+            );
+
+            // Related calculators list (excluding current)
+            const related = CALCULATORS_DB.filter(c => c.id !== calc.id).slice(0, 3);
+
+            container.innerHTML = `
+                <nav class="flex text-xs text-slate-500 mb-4" aria-label="Breadcrumb">
+                    <a href="#/" class="hover:underline">Home</a>
+                    <span class="mx-2">/</span>
+                    <a href="#/${calc.category}-calculators" class="hover:underline">${calc.categoryLabel}</a>
+                    <span class="mx-2">/</span>
+                    <span class="text-slate-800 font-semibold">${calc.title}</span>
+                </nav>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Main Calculator Interactive Workspace -->
+                    <div class="lg:col-span-2 space-y-6">
+                        <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm">
+                            <div class="flex items-center space-x-3 mb-2">
+                                <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">
+                                    <i class="fa-solid ${calc.icon} text-lg"></i>
+                                </div>
+                                <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900">${calc.title}</h1>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-500 mb-6 leading-relaxed">${calc.description}</p>
+
+                            <!-- Dynamic Forms Container -->
+                            <div id="calculator-workspace"></div>
+                        </div>
+
+                        <!-- Explanatory & Educational Content -->
+                        <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+                            <div id="calculator-explanation"></div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar Area (Ad Placeholder + Related Tools) -->
+                    <div class="space-y-6 no-print">
+                        <!-- Sidebar Ad Placeholder -->
+                        <div class="ad-placeholder border border-dashed border-slate-300 rounded-2xl p-6 text-center text-slate-400">
+                            <span class="font-mono text-[10px] uppercase tracking-wider block mb-1">Advertisement</span>
+                            <span class="text-xs">Responsive Sidebar Ad Banner (300x250 or 300x600)</span>
+                        </div>
+
+                        <!-- Related Calculators Card -->
+                        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                            <h3 class="font-bold text-slate-900 text-sm mb-4 uppercase tracking-wider">Related Tools</h3>
+                            <div class="space-y-3">
+                                ${related.map(r => `
+                                    <a href="${r.url}" class="flex items-center p-2.5 hover:bg-slate-50 rounded-lg transition border border-transparent hover:border-slate-200">
+                                        <div class="w-8 h-8 rounded bg-emerald-50 text-emerald-600 flex items-center justify-center mr-3 text-sm">
+                                            <i class="fa-solid ${r.icon}"></i>
+                                        </div>
+                                        <div>
+                                            <div class="text-xs font-semibold text-slate-800">${r.title}</div>
+                                            <div class="text-[10px] text-slate-400">${r.categoryLabel}</div>
+                                        </div>
+                                    </a>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Load tool logic into workspace
+            loadToolWorkspace(calc.id);
+        }
+
+        function loadToolWorkspace(toolId) {
+            const workspace = document.getElementById('calculator-workspace');
+            const explanation = document.getElementById('calculator-explanation');
+
+            switch (toolId) {
+                case 'tip-calculator':
+                    setupTipCalculator(workspace, explanation);
+                    break;
+                case 'discount-calculator':
+                    setupDiscountCalculator(workspace, explanation);
+                    break;
+                case 'percentage-calculator':
+                    setupPercentageCalculator(workspace, explanation);
+                    break;
+                case 'hourly-to-salary-calculator':
+                    setupHourlyToSalaryCalculator(workspace, explanation);
+                    break;
+                case 'salary-to-hourly-calculator':
+                    setupSalaryToHourlyCalculator(workspace, explanation);
+                    break;
+                case 'overtime-calculator':
+                    setupOvertimeCalculator(workspace, explanation);
+                    break;
+                case 'sales-tax-calculator':
+                    setupSalesTaxCalculator(workspace, explanation);
+                    break;
+                case 'paycheck-calculator':
+                    setupPaycheckCalculator(workspace, explanation);
+                    break;
+                case 'age-calculator':
+                    setupAgeCalculator(workspace, explanation);
+                    break;
+                case 'date-calculator':
+                    setupDateCalculator(workspace, explanation);
+                    break;
+                case 'loan-payment-calculator':
+                    setupLoanPaymentCalculator(workspace, explanation);
+                    break;
+                case 'bmi-calculator':
+                    setupBmiCalculator(workspace, explanation);
+                    break;
+            }
+        }
+
+        function setupTipCalculator(ws, exp) {
+            ws.innerHTML = `
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Bill Amount ($)</label>
+                        <input type="number" id="tip-bill" step="0.01" min="0" value="50.00" oninput="calcTip()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900 focus:bg-white text-lg">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Tip Percentage (%)</label>
+                        <div class="grid grid-cols-4 gap-2 mb-2">
+                            <button onclick="setTipPct(15)" class="py-2 bg-slate-100 hover:bg-emerald-600 hover:text-white rounded-lg text-xs font-bold transition">15%</button>
+                            <button onclick="setTipPct(18)" class="py-2 bg-slate-100 hover:bg-emerald-600 hover:text-white rounded-lg text-xs font-bold transition">18%</button>
+                            <button onclick="setTipPct(20)" class="py-2 bg-emerald-600 text-white rounded-lg text-xs font-bold transition">20%</button>
+                            <button onclick="setTipPct(25)" class="py-2 bg-slate-100 hover:bg-emerald-600 hover:text-white rounded-lg text-xs font-bold transition">25%</button>
+                        </div>
+                        <input type="number" id="tip-pct" min="0" value="20" oninput="calcTip()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900 focus:bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Number of People</label>
+                        <input type="number" id="tip-people" min="1" step="1" value="2" oninput="calcTip()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900 focus:bg-white">
+                    </div>
+                    
+                    <div class="pt-4 border-t border-slate-200">
+                        <div class="bg-navy-900 text-white rounded-2xl p-6 shadow-lg space-y-4">
+                            <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                                <span class="text-xs text-slate-400">Total Tip Amount</span>
+                                <span id="out-tip-amt" class="text-2xl font-bold text-emerald-400">$10.00</span>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                                <span class="text-xs text-slate-400">Total Bill (With Tip)</span>
+                                <span id="out-tip-total" class="text-2xl font-bold text-white">$60.00</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <div class="text-xs text-slate-400">Amount Per Person</div>
+                                    <div class="text-[10px] text-slate-500">Includes bill & tip split</div>
+                                </div>
+                                <span id="out-tip-perperson" class="text-3xl font-extrabold text-emerald-400">$30.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex space-x-3 pt-2">
+                        <button onclick="calcTip()" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-sm transition">Calculate</button>
+                        <button onclick="resetTip()" class="px-5 py-3 bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold rounded-xl text-sm transition">Reset</button>
+                    </div>
+                </div>
+            `;
+
+            exp.innerHTML = `
+                <h2 class="text-lg font-bold text-slate-900 mb-2">How to Calculate Tip & Bill Splits</h2>
+                <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                    In the United States, standard tipping for dining services ranges between 15% and 22%. To calculate total tip amount:
+                </p>
+                <div class="bg-slate-100 p-3 rounded-lg font-mono text-xs mb-3 text-slate-800">
+                    Tip Amount = Bill Amount × (Tip Percentage / 100)<br>
+                    Total Bill = Bill Amount + Tip Amount<br>
+                    Per Person Share = Total Bill / Number of People
+                </div>
+                <h3 class="font-bold text-xs text-slate-800 mb-1">Example Calculation:</h3>
+                <p class="text-xs text-slate-600">For a $50 bill with a 20% tip split between 2 people: Tip = $50 × 0.20 = $10. Total Bill = $60. Per person share = $60 / 2 = $30 per person.</p>
+            `;
+
+            window.setTipPct = (val) => {
+                document.getElementById('tip-pct').value = val;
+                calcTip();
+            };
+
+            window.calcTip = () => {
+                const bill = parseFloat(document.getElementById('tip-bill').value) || 0;
+                const pct = parseFloat(document.getElementById('tip-pct').value) || 0;
+                const people = Math.max(1, parseInt(document.getElementById('tip-people').value) || 1);
+
+                const tipAmt = bill * (pct / 100);
+                const total = bill + tipAmt;
+                const perPerson = total / people;
+
+                document.getElementById('out-tip-amt').textContent = `$${tipAmt.toFixed(2)}`;
+                document.getElementById('out-tip-total').textContent = `$${total.toFixed(2)}`;
+                document.getElementById('out-tip-perperson').textContent = `$${perPerson.toFixed(2)}`;
+            };
+
+            window.resetTip = () => {
+                document.getElementById('tip-bill').value = '50.00';
+                document.getElementById('tip-pct').value = '20';
+                document.getElementById('tip-people').value = '2';
+                calcTip();
+            };
+
+            calcTip();
+        }
+
+        function setupDiscountCalculator(ws, exp) {
+            ws.innerHTML = `
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Original Price ($)</label>
+                        <input type="number" id="disc-price" step="0.01" min="0" value="120.00" oninput="calcDiscount()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900 focus:bg-white text-lg">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Discount Percentage (%)</label>
+                        <div class="grid grid-cols-4 gap-2 mb-2">
+                            <button onclick="setDiscPct(10)" class="py-2 bg-slate-100 hover:bg-emerald-600 hover:text-white rounded-lg text-xs font-bold transition">10%</button>
+                            <button onclick="setDiscPct(20)" class="py-2 bg-slate-100 hover:bg-emerald-600 hover:text-white rounded-lg text-xs font-bold transition">20%</button>
+                            <button onclick="setDiscPct(25)" class="py-2 bg-emerald-600 text-white rounded-lg text-xs font-bold transition">25%</button>
+                            <button onclick="setDiscPct(50)" class="py-2 bg-slate-100 hover:bg-emerald-600 hover:text-white rounded-lg text-xs font-bold transition">50%</button>
+                        </div>
+                        <input type="number" id="disc-pct" min="0" max="100" value="25" oninput="calcDiscount()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900 focus:bg-white">
+                    </div>
+
+                    <div class="bg-navy-900 text-white rounded-2xl p-6 shadow-lg space-y-4 mt-4">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                            <span class="text-xs text-slate-400">Total Money Saved</span>
+                            <span id="out-disc-saved" class="text-2xl font-bold text-emerald-400">$30.00</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-slate-400">Final Price After Discount</span>
+                            <span id="out-disc-final" class="text-3xl font-extrabold text-white">$90.00</span>
+                        </div>
+                    </div>
+
+                    <div class="flex space-x-3 pt-2">
+                        <button onclick="calcDiscount()" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-sm transition">Calculate</button>
+                        <button onclick="resetDiscount()" class="px-5 py-3 bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold rounded-xl text-sm transition">Reset</button>
+                    </div>
+                </div>
+            `;
+
+            exp.innerHTML = `
+                <h2 class="text-lg font-bold text-slate-900 mb-2">How to Calculate Discounts</h2>
+                <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                    Discount calculations subtract a percentage from an item's retail sticker price:
+                </p>
+                <div class="bg-slate-100 p-3 rounded-lg font-mono text-xs mb-3 text-slate-800">
+                    Discount Amount = Original Price × (Discount % / 100)<br>
+                    Final Sale Price = Original Price - Discount Amount
+                </div>
+                <h3 class="font-bold text-xs text-slate-800 mb-1">Example:</h3>
+                <p class="text-xs text-slate-600">A $120 jacket with a 25% discount saves $30 ($120 × 0.25), making the final checkout cost $90.</p>
+            `;
+
+            window.setDiscPct = (val) => {
+                document.getElementById('disc-pct').value = val;
+                calcDiscount();
+            };
+
+            window.calcDiscount = () => {
+                const price = parseFloat(document.getElementById('disc-price').value) || 0;
+                const pct = parseFloat(document.getElementById('disc-pct').value) || 0;
+
+                const saved = price * (pct / 100);
+                const finalPrice = Math.max(0, price - saved);
+
+                document.getElementById('out-disc-saved').textContent = `$${saved.toFixed(2)}`;
+                document.getElementById('out-disc-final').textContent = `$${finalPrice.toFixed(2)}`;
+            };
+
+            window.resetDiscount = () => {
+                document.getElementById('disc-price').value = '120.00';
+                document.getElementById('disc-pct').value = '25';
+                calcDiscount();
+            };
+
+            calcDiscount();
+        }
+
+        function setupPercentageCalculator(ws, exp) {
+            ws.innerHTML = `
+                <div class="space-y-6">
+                    <!-- Mode Selection -->
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Select Calculation Mode</label>
+                        <select id="pct-mode" onchange="switchPctMode()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900 text-sm">
+                            <option value="A">Mode A: What is X% of Y?</option>
+                            <option value="B">Mode B: X is what percentage of Y?</option>
+                            <option value="C">Mode C: Percentage Increase from X to Y</option>
+                            <option value="D">Mode D: Percentage Decrease from X to Y</option>
+                            <option value="E">Mode E: Percentage Difference between X and Y</option>
+                        </select>
+                    </div>
+
+                    <!-- Dynamic Input Fields -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label id="lbl-pct-x" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Value X</label>
+                            <input type="number" id="pct-x" step="any" value="20" oninput="calcPct()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900 focus:bg-white">
+                        </div>
+                        <div>
+                            <label id="lbl-pct-y" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Value Y</label>
+                            <input type="number" id="pct-y" step="any" value="150" oninput="calcPct()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900 focus:bg-white">
+                        </div>
+                    </div>
+
+                    <!-- Result Box -->
+                    <div class="bg-navy-900 text-white rounded-2xl p-6 shadow-lg text-center">
+                        <span class="text-xs text-slate-400 block mb-1" id="pct-res-label">Calculated Result</span>
+                        <span id="out-pct-result" class="text-4xl font-extrabold text-emerald-400">30</span>
+                    </div>
+                </div>
+            `;
+
+            exp.innerHTML = `
+                <h2 class="text-lg font-bold text-slate-900 mb-2">Percentage Formulas</h2>
+                <ul class="text-xs text-slate-600 space-y-2 list-disc pl-4">
+                    <li><strong>X% of Y:</strong> (X / 100) × Y</li>
+                    <li><strong>X is % of Y:</strong> (X / Y) × 100</li>
+                    <li><strong>Percentage Increase:</strong> ((Y - X) / X) × 100</li>
+                    <li><strong>Percentage Decrease:</strong> ((X - Y) / X) × 100</li>
+                    <li><strong>Percentage Difference:</strong> (|X - Y| / ((X + Y) / 2)) × 100</li>
+                </ul>
+            `;
+
+            window.switchPctMode = () => {
+                const mode = document.getElementById('pct-mode').value;
+                const lx = document.getElementById('lbl-pct-x');
+                const ly = document.getElementById('lbl-pct-y');
+
+                if (mode === 'A') { lx.innerText = 'Percentage (X%)'; ly.innerText = 'Total Amount (Y)'; }
+                else if (mode === 'B') { lx.innerText = 'Part Amount (X)'; ly.innerText = 'Total Amount (Y)'; }
+                else if (mode === 'C') { lx.innerText = 'Original Value (X)'; ly.innerText = 'New Higher Value (Y)'; }
+                else if (mode === 'D') { lx.innerText = 'Original Value (X)'; ly.innerText = 'New Lower Value (Y)'; }
+                else if (mode === 'E') { lx.innerText = 'First Value (X)'; ly.innerText = 'Second Value (Y)'; }
+
+                calcPct();
+            };
+
+            window.calcPct = () => {
+                const mode = document.getElementById('pct-mode').value;
+                const x = parseFloat(document.getElementById('pct-x').value) || 0;
+                const y = parseFloat(document.getElementById('pct-y').value) || 0;
+                const resEl = document.getElementById('out-pct-result');
+                const lblEl = document.getElementById('pct-res-label');
+
+                let res = 0;
+                if (mode === 'A') {
+                    res = (x / 100) * y;
+                    lblEl.innerText = `${x}% of ${y} is`;
+                    resEl.innerText = res.toFixed(2);
+                } else if (mode === 'B') {
+                    res = y !== 0 ? (x / y) * 100 : 0;
+                    lblEl.innerText = `${x} is what percent of ${y}?`;
+                    resEl.innerText = `${res.toFixed(2)}%`;
+                } else if (mode === 'C') {
+                    res = x !== 0 ? ((y - x) / x) * 100 : 0;
+                    lblEl.innerText = `Percentage Increase from ${x} to ${y}`;
+                    resEl.innerText = `${res.toFixed(2)}%`;
+                } else if (mode === 'D') {
+                    res = x !== 0 ? ((x - y) / x) * 100 : 0;
+                    lblEl.innerText = `Percentage Decrease from ${x} to ${y}`;
+                    resEl.innerText = `${res.toFixed(2)}%`;
+                } else if (mode === 'E') {
+                    const avg = (x + y) / 2;
+                    res = avg !== 0 ? (Math.abs(x - y) / avg) * 100 : 0;
+                    lblEl.innerText = `Percentage Difference between ${x} and ${y}`;
+                    resEl.innerText = `${res.toFixed(2)}%`;
+                }
+            };
+
+            switchPctMode();
+        }
+
+        function setupHourlyToSalaryCalculator(ws, exp) {
+            ws.innerHTML = `
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Hourly Wage ($)</label>
+                        <input type="number" id="h2s-rate" step="0.25" min="0" value="25.00" oninput="calcH2S()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900 text-lg">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Hours / Week</label>
+                            <input type="number" id="h2s-hours" step="1" min="1" max="168" value="40" oninput="calcH2S()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Weeks / Year</label>
+                            <input type="number" id="h2s-weeks" step="1" min="1" max="52" value="52" oninput="calcH2S()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900">
+                        </div>
+                    </div>
+
+                    <div class="bg-navy-900 text-white rounded-2xl p-6 shadow-lg space-y-3">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                            <span class="text-xs text-slate-400">Weekly Gross</span>
+                            <span id="out-h2s-weekly" class="text-lg font-bold text-white">$1,000.00</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                            <span class="text-xs text-slate-400">Bi-Weekly (Every 2 Weeks)</span>
+                            <span id="out-h2s-biweekly" class="text-lg font-bold text-white">$2,000.00</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                            <span class="text-xs text-slate-400">Monthly Gross</span>
+                            <span id="out-h2s-monthly" class="text-lg font-bold text-white">$4,333.33</span>
+                        </div>
+                        <div class="flex justify-between items-center pt-2">
+                            <span class="text-xs text-slate-300 font-semibold uppercase">Annual Gross Salary</span>
+                            <span id="out-h2s-annual" class="text-3xl font-extrabold text-emerald-400">$52,000.00</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            exp.innerHTML = `
+                <h2 class="text-lg font-bold text-slate-900 mb-2">Hourly to Salary Formulas</h2>
+                <p class="text-xs text-slate-600 mb-2">Calculates pre-tax gross income based on standard US 2,080 working hours per year (40 hrs/week × 52 weeks).</p>
+                <div class="bg-slate-100 p-3 rounded-lg font-mono text-xs text-slate-800">
+                    Annual Gross = Hourly Rate × Hours per Week × Weeks per Year
+                </div>
+            `;
+
+            window.calcH2S = () => {
+                const rate = parseFloat(document.getElementById('h2s-rate').value) || 0;
+                const hours = parseFloat(document.getElementById('h2s-hours').value) || 0;
+                const weeks = parseFloat(document.getElementById('h2s-weeks').value) || 0;
+
+                const weekly = rate * hours;
+                const biweekly = weekly * 2;
+                const annual = weekly * weeks;
+                const monthly = annual / 12;
+
+                document.getElementById('out-h2s-weekly').textContent = `$${weekly.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                document.getElementById('out-h2s-biweekly').textContent = `$${biweekly.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                document.getElementById('out-h2s-monthly').textContent = `$${monthly.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                document.getElementById('out-h2s-annual').textContent = `$${annual.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            };
+
+            calcH2S();
+        }
+
+        function setupSalaryToHourlyCalculator(ws, exp) {
+            ws.innerHTML = `
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Annual Salary ($)</label>
+                        <input type="number" id="s2h-annual" step="1000" min="0" value="65000" oninput="calcS2H()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900 text-lg">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Hours / Week</label>
+                            <input type="number" id="s2h-hours" step="1" min="1" max="168" value="40" oninput="calcS2H()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Weeks / Year</label>
+                            <input type="number" id="s2h-weeks" step="1" min="1" max="52" value="52" oninput="calcS2H()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900">
+                        </div>
+                    </div>
+
+                    <div class="bg-navy-900 text-white rounded-2xl p-6 shadow-lg space-y-3">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                            <span class="text-xs text-slate-400">Equivalent Weekly Wage</span>
+                            <span id="out-s2h-weekly" class="text-lg font-bold text-white">$1,250.00</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                            <span class="text-xs text-slate-400">Daily Rate (5-day week)</span>
+                            <span id="out-s2h-daily" class="text-lg font-bold text-white">$250.00</span>
+                        </div>
+                        <div class="flex justify-between items-center pt-2">
+                            <span class="text-xs text-slate-300 font-semibold uppercase">Equivalent Hourly Rate</span>
+                            <span id="out-s2h-hourly" class="text-3xl font-extrabold text-emerald-400">$31.25/hr</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            exp.innerHTML = `
+                <h2 class="text-lg font-bold text-slate-900 mb-2">Salary to Hourly Breakdown</h2>
+                <p class="text-xs text-slate-600 mb-2">Converts annual compensation offers into standard hourly equivalents.</p>
+                <div class="bg-slate-100 p-3 rounded-lg font-mono text-xs text-slate-800">
+                    Hourly Wage = Annual Salary / (Hours per Week × Weeks per Year)
+                </div>
+            `;
+
+            window.calcS2H = () => {
+                const annual = parseFloat(document.getElementById('s2h-annual').value) || 0;
+                const hours = parseFloat(document.getElementById('s2h-hours').value) || 1;
+                const weeks = parseFloat(document.getElementById('s2h-weeks').value) || 1;
+
+                const totalHours = hours * weeks;
+                const hourly = totalHours > 0 ? annual / totalHours : 0;
+                const weekly = annual / weeks;
+                const daily = weekly / 5;
+
+                document.getElementById('out-s2h-weekly').textContent = `$${weekly.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                document.getElementById('out-s2h-daily').textContent = `$${daily.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                document.getElementById('out-s2h-hourly').textContent = `$${hourly.toFixed(2)}/hr`;
+            };
+
+            calcS2H();
+        }
+
+        function setupOvertimeCalculator(ws, exp) {
+            ws.innerHTML = `
+                <div class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Regular Hourly Rate ($)</label>
+                            <input type="number" id="ot-rate" step="0.5" value="20.00" oninput="calcOT()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Overtime Multiplier</label>
+                            <select id="ot-mult" onchange="calcOT()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900">
+                                <option value="1.5">1.5x (Time and a half)</option>
+                                <option value="2.0">2.0x (Double time)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Regular Hours Worked</label>
+                            <input type="number" id="ot-reghours" value="40" oninput="calcOT()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Overtime Hours Worked</label>
+                            <input type="number" id="ot-othours" value="10" oninput="calcOT()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900">
+                        </div>
+                    </div>
+
+                    <div class="bg-navy-900 text-white rounded-2xl p-6 shadow-lg space-y-3">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                            <span class="text-xs text-slate-400">Regular Pay</span>
+                            <span id="out-ot-regpay" class="text-lg font-bold text-white">$800.00</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                            <span class="text-xs text-slate-400">Overtime Rate</span>
+                            <span id="out-ot-otrate" class="text-sm font-bold text-emerald-400">$30.00 / hr</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                            <span class="text-xs text-slate-400">Overtime Total Pay</span>
+                            <span id="out-ot-otpay" class="text-lg font-bold text-emerald-400">$300.00</span>
+                        </div>
+                        <div class="flex justify-between items-center pt-2">
+                            <span class="text-xs text-slate-300 font-semibold uppercase">Total Gross Earnings</span>
+                            <span id="out-ot-total" class="text-3xl font-extrabold text-white">$1,100.00</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            exp.innerHTML = `
+                <h2 class="text-lg font-bold text-slate-900 mb-2">US Fair Labor Standards Act (FLSA) Overtime</h2>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                    Under US federal law, non-exempt employees must receive overtime pay for hours worked over 40 in a workweek at a rate not less than time and one-half (1.5x) their regular rate of pay.
+                </p>
+            `;
+
+            window.calcOT = () => {
+                const rate = parseFloat(document.getElementById('ot-rate').value) || 0;
+                const mult = parseFloat(document.getElementById('ot-mult').value) || 1.5;
+                const regHours = parseFloat(document.getElementById('ot-reghours').value) || 0;
+                const otHours = parseFloat(document.getElementById('ot-othours').value) || 0;
+
+                const regPay = rate * regHours;
+                const otRate = rate * mult;
+                const otPay = otRate * otHours;
+                const total = regPay + otPay;
+
+                document.getElementById('out-ot-regpay').textContent = `$${regPay.toFixed(2)}`;
+                document.getElementById('out-ot-otrate').textContent = `$${otRate.toFixed(2)} / hr`;
+                document.getElementById('out-ot-otpay').textContent = `$${otPay.toFixed(2)}`;
+                document.getElementById('out-ot-total').textContent = `$${total.toFixed(2)}`;
+            };
+
+            calcOT();
+        }
+
+        function setupSalesTaxCalculator(ws, exp) {
+            ws.innerHTML = `
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Item Purchase Price ($)</label>
+                        <input type="number" id="st-price" step="0.01" value="100.00" oninput="calcSalesTax()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900 text-lg">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Sales Tax Rate (%)</label>
+                        <input type="number" id="st-rate" step="0.1" value="7.25" oninput="calcSalesTax()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900">
+                        <span class="text-[11px] text-slate-400 mt-1 block">Enter combined state, county, and local city tax rate.</span>
+                    </div>
+
+                    <div class="bg-navy-900 text-white rounded-2xl p-6 shadow-lg space-y-3">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                            <span class="text-xs text-slate-400">Sales Tax Amount</span>
+                            <span id="out-st-tax" class="text-xl font-bold text-emerald-400">$7.25</span>
+                        </div>
+                        <div class="flex justify-between items-center pt-2">
+                            <span class="text-xs text-slate-300 font-semibold uppercase">Total Out-of-Pocket Cost</span>
+                            <span id="out-st-total" class="text-3xl font-extrabold text-white">$107.25</span>
+                        </div>
+                    </div>
+
+                    <div class="p-3 bg-amber-50 border border-amber-200 rounded-xl text-amber-800 text-xs flex items-start space-x-2">
+                        <i class="fa-solid fa-triangle-exclamation mt-0.5"></i>
+                        <span><strong>Notice:</strong> Sales tax rates vary significantly across US states, counties, and municipal districts. Please verify applicable rates with your local department of revenue.</span>
+                    </div>
+                </div>
+            `;
+
+            exp.innerHTML = `
+                <h2 class="text-lg font-bold text-slate-900 mb-2">Understanding US State & Local Sales Taxes</h2>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                    Unlike many countries with national VAT taxes, US sales taxes are determined at state, county, and city levels. Five states (Alaska, Delaware, Montana, New Hampshire, and Oregon) charge zero statewide sales tax.
+                </p>
+            `;
+
+            window.calcSalesTax = () => {
+                const price = parseFloat(document.getElementById('st-price').value) || 0;
+                const rate = parseFloat(document.getElementById('st-rate').value) || 0;
+
+                const tax = price * (rate / 100);
+                const total = price + tax;
+
+                document.getElementById('out-st-tax').textContent = `$${tax.toFixed(2)}`;
+                document.getElementById('out-st-total').textContent = `$${total.toFixed(2)}`;
+            };
+
+            calcSalesTax();
+        }
+
+        function setupPaycheckCalculator(ws, exp) {
+            ws.innerHTML = `
+                <div class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Gross Salary Amount ($)</label>
+                            <input type="number" id="pay-gross" value="5000" oninput="calcPaycheck()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Pay Frequency</label>
+                            <select id="pay-freq" onchange="calcPaycheck()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900">
+                                <option value="12">Monthly (12/yr)</option>
+                                <option value="24">Semi-Monthly (24/yr)</option>
+                                <option value="26" selected>Bi-Weekly (26/yr)</option>
+                                <option value="52">Weekly (52/yr)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Est. Federal Tax (%)</label>
+                            <input type="number" id="pay-fed" value="12" oninput="calcPaycheck()" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-lg font-semibold text-slate-900">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Est. State Tax (%)</label>
+                            <input type="number" id="pay-state" value="5" oninput="calcPaycheck()" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-lg font-semibold text-slate-900">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">FICA / Social Sec (%)</label>
+                            <input type="number" id="pay-fica" value="7.65" readonly class="w-full p-2.5 bg-slate-100 border border-slate-200 rounded-lg font-semibold text-slate-500 cursor-not-allowed">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Other Per-Paycheck Deductions ($)</label>
+                        <input type="number" id="pay-deduct" value="150" oninput="calcPaycheck()" placeholder="401k, health insurance..." class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900">
+                    </div>
+
+                    <div class="bg-navy-900 text-white rounded-2xl p-6 shadow-lg space-y-3">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                            <span class="text-xs text-slate-400">Gross Pay Per Check</span>
+                            <span id="out-pay-grossper" class="text-base font-bold text-white">$1,923.08</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-2 text-rose-400">
+                            <span class="text-xs">Total Tax & Withholdings</span>
+                            <span id="out-pay-taxes" class="text-base font-bold">-$474.12</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-2 text-rose-400">
+                            <span class="text-xs">Other Deductions</span>
+                            <span id="out-pay-other" class="text-base font-bold">-$150.00</span>
+                        </div>
+                        <div class="flex justify-between items-center pt-2">
+                            <span class="text-xs text-slate-300 font-semibold uppercase">Est. Take-Home Pay</span>
+                            <span id="out-pay-takehome" class="text-3xl font-extrabold text-emerald-400">$1,298.96</span>
+                        </div>
+                    </div>
+
+                    <p class="text-[11px] text-slate-400 text-center italic">
+                        * Educational estimator only. Not official payroll or tax advice. Actual withholdings depend on W-4 allowances and local jurisdictions.
+                    </p>
+                </div>
+            `;
+
+            exp.innerHTML = `
+                <h2 class="text-lg font-bold text-slate-900 mb-2">Paycheck Breakdown Factors</h2>
+                <p class="text-xs text-slate-600 leading-relaxed mb-2">
+                    Standard US paychecks undergo several automated payroll deductions prior to direct deposit:
+                </p>
+                <ul class="text-xs text-slate-600 space-y-1 list-disc pl-4">
+                    <li><strong>FICA Taxes:</strong> mandatory 6.2% Social Security + 1.45% Medicare tax (7.65% total).</li>
+                    <li><strong>Federal Income Tax:</strong> bracket withholding based on W-4 filing status.</li>
+                    <li><strong>State & Local Tax:</strong> state-specific withholding rates.</li>
+                </ul>
+            `;
+
+            window.calcPaycheck = () => {
+                const totalGross = parseFloat(document.getElementById('pay-gross').value) || 0;
+                const freq = parseFloat(document.getElementById('pay-freq').value) || 26;
+                const fedPct = parseFloat(document.getElementById('pay-fed').value) || 0;
+                const statePct = parseFloat(document.getElementById('pay-state').value) || 0;
+                const ficaPct = 7.65;
+                const deductions = parseFloat(document.getElementById('pay-deduct').value) || 0;
+
+                const grossPer = totalGross / freq;
+                const totalTaxPct = fedPct + statePct + ficaPct;
+                const taxAmt = grossPer * (totalTaxPct / 100);
+                const takeHome = Math.max(0, grossPer - taxAmt - deductions);
+
+                document.getElementById('out-pay-grossper').textContent = `$${grossPer.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                document.getElementById('out-pay-taxes').textContent = `-$${taxAmt.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                document.getElementById('out-pay-other').textContent = `-$${deductions.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                document.getElementById('out-pay-takehome').textContent = `$${takeHome.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            };
+
+            calcPaycheck();
+        }
+
+        function setupAgeCalculator(ws, exp) {
+            ws.innerHTML = `
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Select Date of Birth</label>
+                        <input type="date" id="age-dob" value="1995-06-15" onchange="calcAge()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900 text-base">
+                    </div>
+
+                    <div class="bg-navy-900 text-white rounded-2xl p-6 shadow-lg space-y-4">
+                        <div class="text-center pb-3 border-b border-slate-800">
+                            <span class="text-xs text-slate-400 block mb-1">Your Exact Chronological Age</span>
+                            <span id="out-age-exact" class="text-2xl sm:text-3xl font-extrabold text-emerald-400">-- Years, -- Months, -- Days</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 text-center">
+                            <div>
+                                <span class="text-[11px] text-slate-400 block">Total Days Lived</span>
+                                <span id="out-age-days" class="text-xl font-bold text-white">--</span>
+                            </div>
+                            <div>
+                                <span class="text-[11px] text-slate-400 block">Next Birthday In</span>
+                                <span id="out-age-next" class="text-xl font-bold text-emerald-400">-- Days</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            exp.innerHTML = `
+                <h2 class="text-lg font-bold text-slate-900 mb-2">Chronological Age Calculation</h2>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                    Calculates your exact age taking into account varying calendar month lengths and leap years.
+                </p>
+            `;
+
+            window.calcAge = () => {
+                const dobVal = document.getElementById('age-dob').value;
+                if (!dobVal) return;
+
+                const dob = new Date(dobVal + 'T00:00:00');
+                const today = new Date();
+
+                if (dob > today) {
+                    document.getElementById('out-age-exact').textContent = "Date of Birth cannot be in the future";
+                    return;
+                }
+
+                let years = today.getFullYear() - dob.getFullYear();
+                let months = today.getMonth() - dob.getMonth();
+                let days = today.getDate() - dob.getDate();
+
+                if (days < 0) {
+                    months--;
+                    const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+                    days += prevMonth.getDate();
+                }
+                if (months < 0) {
+                    years--;
+                    months += 12;
+                }
+
+                const diffTime = Math.abs(today - dob);
+                const totalDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+                // Next birthday
+                let nextBday = new Date(today.getFullYear(), dob.getMonth(), dob.getDate());
+                if (today > nextBday) {
+                    nextBday.setFullYear(today.getFullYear() + 1);
+                }
+                const daysToBday = Math.ceil((nextBday - today) / (1000 * 60 * 60 * 24));
+
+                document.getElementById('out-age-exact').textContent = `${years} Years, ${months} Months, ${days} Days`;
+                document.getElementById('out-age-days').textContent = totalDays.toLocaleString();
+                document.getElementById('out-age-next').textContent = `${daysToBday} Days`;
+            };
+
+            calcAge();
+        }
+
+        function setupDateCalculator(ws, exp) {
+            const today = new Date().toISOString().split('T')[0];
+            ws.innerHTML = `
+                <div class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Start Date</label>
+                            <input type="date" id="date-start" value="2026-01-01" onchange="calcDateDiff()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">End Date</label>
+                            <input type="date" id="date-end" value="${today}" onchange="calcDateDiff()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900">
+                        </div>
+                    </div>
+
+                    <div class="bg-navy-900 text-white rounded-2xl p-6 shadow-lg space-y-3">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                            <span class="text-xs text-slate-400">Total Calendar Days</span>
+                            <span id="out-dd-days" class="text-2xl font-bold text-emerald-400">-- Days</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                            <span class="text-xs text-slate-400">Weeks + Remaining Days</span>
+                            <span id="out-dd-weeks" class="text-lg font-bold text-white">--</span>
+                        </div>
+                        <div class="flex justify-between items-center pt-1">
+                            <span class="text-xs text-slate-400">Approx. Months</span>
+                            <span id="out-dd-months" class="text-lg font-bold text-white">--</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            exp.innerHTML = `
+                <h2 class="text-lg font-bold text-slate-900 mb-2">Calendar Span Logic</h2>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                    Computes exact calendar intervals between two selected dates, correctly handling leap years and variable month days.
+                </p>
+            `;
+
+            window.calcDateDiff = () => {
+                const sVal = document.getElementById('date-start').value;
+                const eVal = document.getElementById('date-end').value;
+
+                if (!sVal || !eVal) return;
+
+                const d1 = new Date(sVal + 'T00:00:00');
+                const d2 = new Date(eVal + 'T00:00:00');
+
+                const diffMs = Math.abs(d2 - d1);
+                const totalDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+                const weeks = Math.floor(totalDays / 7);
+                const remDays = totalDays % 7;
+                const approxMonths = (totalDays / 30.4375).toFixed(1);
+
+                document.getElementById('out-dd-days').textContent = `${totalDays.toLocaleString()} Days`;
+                document.getElementById('out-dd-weeks').textContent = `${weeks} Weeks, ${remDays} Days`;
+                document.getElementById('out-dd-months').textContent = `${approxMonths} Months`;
+            };
+
+            calcDateDiff();
+        }
+
+        function setupLoanPaymentCalculator(ws, exp) {
+            ws.innerHTML = `
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Loan Principal Amount ($)</label>
+                        <input type="number" id="loan-amt" step="1000" value="25000" oninput="calcLoan()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900 text-lg">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Annual Interest Rate (APR %)</label>
+                            <input type="number" id="loan-rate" step="0.1" value="6.5" oninput="calcLoan()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Loan Term (Years)</label>
+                            <input type="number" id="loan-term" step="1" value="5" oninput="calcLoan()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900">
+                        </div>
+                    </div>
+
+                    <div class="bg-navy-900 text-white rounded-2xl p-6 shadow-lg space-y-3">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                            <span class="text-xs text-slate-400">Total Payments (Principal + Interest)</span>
+                            <span id="out-loan-total" class="text-lg font-bold text-white">$29,348.40</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                            <span class="text-xs text-slate-400">Total Interest Paid</span>
+                            <span id="out-loan-interest" class="text-lg font-bold text-emerald-400">$4,348.40</span>
+                        </div>
+                        <div class="flex justify-between items-center pt-2">
+                            <span class="text-xs text-slate-300 font-semibold uppercase">Est. Monthly Payment</span>
+                            <span id="out-loan-monthly" class="text-3xl font-extrabold text-white">$489.14</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            exp.innerHTML = `
+                <h2 class="text-lg font-bold text-slate-900 mb-2">Loan Amortization Formula</h2>
+                <div class="bg-slate-100 p-3 rounded-lg font-mono text-xs text-slate-800 mb-2">
+                    M = P × [r(1+r)^n] / [(1+r)^n - 1]
+                </div>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                    Where <strong>M</strong> = Monthly Payment, <strong>P</strong> = Principal, <strong>r</strong> = Monthly Interest Rate (APR/12/100), and <strong>n</strong> = Total number of monthly payments.
+                </p>
+            `;
+
+            window.calcLoan = () => {
+                const P = parseFloat(document.getElementById('loan-amt').value) || 0;
+                const apr = parseFloat(document.getElementById('loan-rate').value) || 0;
+                const years = parseFloat(document.getElementById('loan-term').value) || 1;
+
+                const r = apr / 100 / 12;
+                const n = years * 12;
+
+                let monthly = 0;
+                if (r > 0) {
+                    monthly = (P * (r * Math.pow(1 + r, n))) / (Math.pow(1 + r, n) - 1);
+                } else {
+                    monthly = P / n;
+                }
+
+                const totalPaid = monthly * n;
+                const totalInterest = Math.max(0, totalPaid - P);
+
+                document.getElementById('out-loan-monthly').textContent = `$${monthly.toFixed(2)}`;
+                document.getElementById('out-loan-total').textContent = `$${totalPaid.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                document.getElementById('out-loan-interest').textContent = `$${totalInterest.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            };
+
+            calcLoan();
+        }
+
+        function setupBmiCalculator(ws, exp) {
+            ws.innerHTML = `
+                <div class="space-y-4">
+                    <!-- Unit Toggle -->
+                    <div class="flex border border-slate-300 rounded-xl overflow-hidden p-1 bg-slate-100">
+                        <button id="btn-unit-us" onclick="setBmiUnit('us')" class="flex-1 py-2 font-bold text-xs rounded-lg bg-emerald-600 text-white transition">US Standard (lbs, in)</button>
+                        <button id="btn-unit-metric" onclick="setBmiUnit('metric')" class="flex-1 py-2 font-bold text-xs rounded-lg text-slate-600 transition">Metric (kg, cm)</button>
+                    </div>
+
+                    <!-- Input Fields -->
+                    <div id="bmi-inputs-us" class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Height (Inches)</label>
+                            <input type="number" id="bmi-height-in" value="70" oninput="calcBmi()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900">
+                            <span class="text-[10px] text-slate-400 mt-0.5 block">5 ft 10 in = 70 in</span>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Weight (Pounds)</label>
+                            <input type="number" id="bmi-weight-lbs" value="160" oninput="calcBmi()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900">
+                        </div>
+                    </div>
+
+                    <div id="bmi-inputs-metric" class="grid grid-cols-2 gap-4 hidden">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Height (cm)</label>
+                            <input type="number" id="bmi-height-cm" value="178" oninput="calcBmi()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Weight (kg)</label>
+                            <input type="number" id="bmi-weight-kg" value="72" oninput="calcBmi()" class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900">
+                        </div>
+                    </div>
+
+                    <!-- Output Card -->
+                    <div class="bg-navy-900 text-white rounded-2xl p-6 shadow-lg text-center space-y-2">
+                        <span class="text-xs text-slate-400 block uppercase tracking-wider">Your Body Mass Index (BMI)</span>
+                        <span id="out-bmi-score" class="text-4xl font-extrabold text-emerald-400">23.0</span>
+                        <div id="out-bmi-cat" class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                            Normal Weight
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            exp.innerHTML = `
+                <h2 class="text-lg font-bold text-slate-900 mb-2">CDC Standard BMI Categories</h2>
+                <div class="text-xs text-slate-600 space-y-1.5 mb-3">
+                    <div class="flex justify-between border-b pb-1"><span>Underweight</span><span class="font-bold">&lt; 18.5</span></div>
+                    <div class="flex justify-between border-b pb-1"><span>Normal weight</span><span class="font-bold text-emerald-600">18.5 – 24.9</span></div>
+                    <div class="flex justify-between border-b pb-1"><span>Overweight</span><span class="font-bold text-amber-600">25.0 – 29.9</span></div>
+                    <div class="flex justify-between border-b pb-1"><span>Obesity</span><span class="font-bold text-rose-600">&ge; 30.0</span></div>
+                </div>
+                <p class="text-[11px] text-slate-400 italic">
+                    Disclaimer: BMI is a general indicator and does not directly measure body fat or muscle mass.
+                </p>
+            `;
+
+            let currentUnit = 'us';
+
+            window.setBmiUnit = (unit) => {
+                currentUnit = unit;
+                const usBtn = document.getElementById('btn-unit-us');
+                const metricBtn = document.getElementById('btn-unit-metric');
+                const usInputs = document.getElementById('bmi-inputs-us');
+                const metricInputs = document.getElementById('bmi-inputs-metric');
+
+                if (unit === 'us') {
+                    usBtn.className = 'flex-1 py-2 font-bold text-xs rounded-lg bg-emerald-600 text-white transition';
+                    metricBtn.className = 'flex-1 py-2 font-bold text-xs rounded-lg text-slate-600 transition';
+                    usInputs.classList.remove('hidden');
+                    metricInputs.classList.add('hidden');
+                } else {
+                    metricBtn.className = 'flex-1 py-2 font-bold text-xs rounded-lg bg-emerald-600 text-white transition';
+                    usBtn.className = 'flex-1 py-2 font-bold text-xs rounded-lg text-slate-600 transition';
+                    metricInputs.classList.remove('hidden');
+                    usInputs.classList.add('hidden');
+                }
+                calcBmi();
+            };
+
+            window.calcBmi = () => {
+                let bmi = 0;
+                if (currentUnit === 'us') {
+                    const inches = parseFloat(document.getElementById('bmi-height-in').value) || 1;
+                    const lbs = parseFloat(document.getElementById('bmi-weight-lbs').value) || 0;
+                    bmi = (lbs / (inches * inches)) * 703;
+                } else {
+                    const cm = parseFloat(document.getElementById('bmi-height-cm').value) || 1;
+                    const kg = parseFloat(document.getElementById('bmi-weight-kg').value) || 0;
+                    const meters = cm / 100;
+                    bmi = kg / (meters * meters);
+                }
+
+                const scoreEl = document.getElementById('out-bmi-score');
+                const catEl = document.getElementById('out-bmi-cat');
+
+                if (!isNaN(bmi) && isFinite(bmi) && bmi > 0) {
+                    scoreEl.textContent = bmi.toFixed(1);
+
+                    if (bmi < 18.5) {
+                        catEl.textContent = 'Underweight';
+                        catEl.className = 'inline-block px-3 py-1 rounded-full text-xs font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30';
+                    } else if (bmi < 25) {
+                        catEl.textContent = 'Normal Weight';
+                        catEl.className = 'inline-block px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30';
+                    } else if (bmi < 30) {
+                        catEl.textContent = 'Overweight';
+                        catEl.className = 'inline-block px-3 py-1 rounded-full text-xs font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30';
+                    } else {
+                        catEl.textContent = 'Obese';
+                        catEl.className = 'inline-block px-3 py-1 rounded-full text-xs font-bold bg-rose-500/20 text-rose-400 border border-rose-500/30';
+                    }
+                }
+            };
+
+            calcBmi();
+        }
+
+        function renderAboutPage(container) {
+            updateSeoMetadata("About Us", "Learn more about US Daily Money Tools mission to provide accurate, transparent calculators.", "/about");
+            container.innerHTML = `
+                <div class="max-w-3xl mx-auto bg-white rounded-2xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-6">
+                    <h1 class="text-3xl font-extrabold text-slate-900">About US Daily Money Tools</h1>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        US Daily Money Tools was built with a simple goal: provide fast, reliable, private, and zero-clutter financial and mathematical calculators designed specifically for everyday US consumers.
+                    </p>
+                    <h2 class="text-lg font-bold text-slate-900 pt-2 border-t border-slate-100">Our Principles</h2>
+                    <ul class="text-sm text-slate-600 space-y-2 list-disc pl-5">
+                        <li><strong>100% Client-Side Privacy:</strong> Your financial numbers never leave your device or get sent to remote servers.</li>
+                        <li><strong>No Intrusive Interstitials:</strong> Clean user interface without popups or fake download buttons.</li>
+                        <li><strong>Mobile First Design:</strong> Large touch-friendly input controls built for seamless operation on smartphones and tablets.</li>
+                    </ul>
+                </div>
+            `;
+        }
+
+        function renderContactPage(container) {
+            updateSeoMetadata("Contact Us", "Get in touch with the US Daily Money Tools team.", "/contact");
+            container.innerHTML = `
+                <div class="max-w-xl mx-auto bg-white rounded-2xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-6">
+                    <h1 class="text-3xl font-extrabold text-slate-900">Contact Us</h1>
+                    <p class="text-xs text-slate-500">Have feedback, calculator suggestions, or bug reports? Send us a message below.</p>
+                    
+                    <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Your Name</label>
+                            <input type="text" required class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Email Address</label>
+                            <input type="email" placeholder="contact@usdailymoneytools.com" required class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Message</label>
+                            <textarea rows="4" required class="w-full p-3 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-sm transition">Send Message</button>
+                    </form>
+                    <div id="contact-success" class="hidden p-4 bg-emerald-50 text-emerald-700 text-xs rounded-xl font-medium text-center">
+                        Thank you! Your message has been simulated and sent successfully.
+                    </div>
+                </div>
+            `;
+
+            window.handleContactSubmit = (e) => {
+                e.preventDefault();
+                document.getElementById('contact-success').classList.remove('hidden');
+                e.target.reset();
+            };
+        }
+
+        function renderPrivacyPage(container) {
+            updateSeoMetadata("Privacy Policy", "Official Privacy Policy for US Daily Money Tools.", "/privacy-policy");
+            container.innerHTML = `
+                <div class="max-w-3xl mx-auto bg-white rounded-2xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-4 text-xs text-slate-600 leading-relaxed">
+                    <h1 class="text-2xl font-extrabold text-slate-900 mb-4">Privacy Policy</h1>
+                    <p>US Daily Money Tools operates as a client-side utility suite. We respect your privacy and process all computations directly within your local web browser.</p>
+                    <h2 class="text-sm font-bold text-slate-800 pt-2">Analytics & Advertising</h2>
+                    <p>We may utilize privacy-friendly third-party analytics (such as Google Analytics) and standard advertising networks (Google AdSense) to measure general traffic statistics and serve contextual advertisements.</p>
+                    <h2 class="text-sm font-bold text-slate-800 pt-2">Cookies</h2>
+                    <p>Cookies may be used by advertising partners to display tailored ads based on non-personally identifiable browser activity.</p>
+                </div>
+            `;
+        }
+
+        function renderTermsPage(container) {
+            updateSeoMetadata("Terms of Use", "Terms of Use for US Daily Money Tools.", "/terms");
+            container.innerHTML = `
+                <div class="max-w-3xl mx-auto bg-white rounded-2xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-4 text-xs text-slate-600 leading-relaxed">
+                    <h1 class="text-2xl font-extrabold text-slate-900 mb-4">Terms of Use</h1>
+                    <p>By accessing US Daily Money Tools, you agree to use our calculators for personal, non-commercial educational purposes.</p>
+                    <p>All calculators are provided "as is" without warranty of any kind regarding mathematical perfection or legal tax applicability.</p>
+                </div>
+            `;
+        }
+
+        function renderDisclaimerPage(container) {
+            updateSeoMetadata("Financial & Tax Disclaimer", "Financial and legal disclaimer for US Daily Money Tools.", "/disclaimer");
+            container.innerHTML = `
+                <div class="max-w-3xl mx-auto bg-white rounded-2xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-4 text-xs text-slate-600 leading-relaxed">
+                    <h1 class="text-2xl font-extrabold text-slate-900 mb-4">Financial & Legal Disclaimer</h1>
+                    <div class="p-4 bg-amber-50 border border-amber-200 rounded-xl text-amber-900 text-xs">
+                        <strong>Important:</strong> The tools and outputs on this site are for estimation and educational reference only. They do NOT constitute formal financial, CPA tax, legal, or medical advice.
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderSitemapPage(container) {
+            updateSeoMetadata("sitemap.xml Code", "Generated XML sitemap for website deployment.", "/sitemap.xml");
+            
+            const urls = [
+                '/', '/money-calculators', '/salary-calculators', '/tax-calculators', '/math-calculators', '/date-calculators',
+                '/tip-calculator', '/discount-calculator', '/percentage-calculator', '/hourly-to-salary-calculator',
+                '/salary-to-hourly-calculator', '/overtime-calculator', '/sales-tax-calculator', '/paycheck-calculator',
+                '/age-calculator', '/date-calculator', '/loan-payment-calculator', '/bmi-calculator',
+                '/about', '/contact', '/privacy-policy', '/terms', '/disclaimer'
+            ];
+
+            const xmlContent = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls.map(u => `  <url>
+    <loc>https://usdailymoneytools.com${u}</loc>
+    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>${u === '/' ? '1.0' : '0.8'}</priority>
+  </url>`).join('\n')}
+</urlset>`;
+
+            container.innerHTML = `
+                <div class="bg-slate-900 text-slate-100 rounded-2xl p-6 font-mono text-xs overflow-x-auto border border-slate-700 shadow-xl">
+                    <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-800">
+                        <span class="font-bold text-emerald-400">sitemap.xml Output Code</span>
+                        <button onclick="copySitemapCode()" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded text-xs transition">Copy XML</button>
+                    </div>
+                    <pre id="sitemap-text">${xmlContent.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</pre>
+                </div>
+            `;
+
+            window.copySitemapCode = () => {
+                const el = document.createElement('textarea');
+                el.value = xmlContent;
+                document.body.appendChild(el);
+                el.select();
+                document.execCommand('copy');
+                document.body.removeChild(el);
+                alert('sitemap.xml code copied to clipboard!');
+            };
+        }
+
+        function renderRobotsPage(container) {
+            updateSeoMetadata("robots.txt Code", "Generated robots.txt snippet.", "/robots.txt");
+            const txt = `User-agent: *\nAllow: /\n\nSitemap: https://usdailymoneytools.com/sitemap.xml`;
+            container.innerHTML = `
+                <div class="bg-slate-900 text-slate-100 rounded-2xl p-6 font-mono text-xs overflow-x-auto border border-slate-700 shadow-xl">
+                    <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-800">
+                        <span class="font-bold text-emerald-400">robots.txt Code</span>
+                    </div>
+                    <pre>${txt}</pre>
+                </div>
+            `;
+        }
+
+        function render404Page(container) {
+            container.innerHTML = `
+                <div class="py-16 text-center space-y-4">
+                    <h1 class="text-4xl font-extrabold text-slate-900">404 - Page Not Found</h1>
+                    <p class="text-slate-500 text-sm">The calculator or page you requested could not be located.</p>
+                    <a href="#/" class="inline-block px-6 py-3 bg-emerald-600 text-white font-bold rounded-xl text-sm shadow">Back to Homepage</a>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
